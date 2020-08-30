@@ -2,7 +2,7 @@ $bg_color: #880E4F;
 $text_color: #FFFFFF;
 $bgpag_color: #fbfbfb;
 $text_high: #d81b60;
-
+$bg_dark: #212121;
 body{
     margin: 0;
     background: $bgpag_color;
@@ -28,9 +28,6 @@ li{
         display: inline-block;
         vertical-align: middle;
     }
-    span{
-        display:block;
-    }
 }
 
 .pb_data{
@@ -55,8 +52,9 @@ li{
     float: right;
     padding: 5px 20px;
     color: #FFF;
-    margin-right: -15px;
+    margin-top: -10px;
 }
 
 .flag_green{background: #3c9650;border: 1px solid #256b34;}
 .flag_yellow{background: #b5b714;border: 1px solid #809821;}
+.flag_background{background: $text_high;border-color:$bg_color;}

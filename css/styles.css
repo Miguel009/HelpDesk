@@ -22,9 +22,6 @@ li {
   display: inline-block;
   vertical-align: middle;
 }
-.pb_cont span {
-  display: block;
-}
 
 .pb_data {
   margin-left: 0.5em;
@@ -48,7 +45,7 @@ li {
   float: right;
   padding: 5px 20px;
   color: #FFF;
-  margin-right: -15px;
+  margin-top: -10px;
 }
 
 .flag_green {
@@ -59,6 +56,11 @@ li {
 .flag_yellow {
   background: #b5b714;
   border: 1px solid #809821;
+}
+
+.flag_background {
+  background: #d81b60;
+  border-color: #880E4F;
 }
 
 /*# sourceMappingURL=styles.css.map */
