@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap");
 body {
   margin: 0;
   background: #fbfbfb;
@@ -11,6 +12,14 @@ li {
   background: #880E4F;
   color: #FFFFFF;
   padding: 3em 2em;
+  color: #FFFFFF;
+  padding: 3em 2em;
+  background: linear-gradient(rgba(136, 14, 79, 0.5), rgba(136, 14, 79, 0.5)), url(https://cdn.pixabay.com/photo/2015/05/15/14/38/computer-768608_960_720.jpg);
+  /* Copyright https://pixabay.com/es/photos/equipo-ordenador-port%C3%A1til-tecnolog%C3%ADa-768608/ */
+  background-position: right;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .pb_cont img {
@@ -30,6 +39,15 @@ li {
   margin: 0;
   color: #d81b60;
 }
+.pb_data i {
+  font-size: 18px;
+}
+.pb_data .sm_user {
+  font-size: 14px;
+}
+.pb_data .sm_desc {
+  font-size: 12px;
+}
 
 .main {
   padding: 1em;
@@ -37,7 +55,7 @@ li {
 
 .row_mn_main li {
   padding: 0.5em;
-  border: 1px solid #d8d8d8;
+  border: 1px solid #eaeaea;
   margin-bottom: 0.5em;
 }
 
@@ -45,7 +63,17 @@ li {
   float: right;
   padding: 5px 20px;
   color: #FFF;
-  margin-top: -10px;
+  font-weight: bold;
+}
+.flag_rpl span {
+  font-weight: normal;
+}
+
+.navbar_main {
+  border-bottom: 3px solid #880E4F;
+}
+.navbar_main .nav-link {
+  color: #d81b60 !important;
 }
 
 .flag_green {
@@ -61,6 +89,33 @@ li {
 .flag_background {
   background: #d81b60;
   border-color: #880E4F;
+}
+
+.card_icon i {
+  font-size: 15rem;
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: "liga";
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -6,6 +6,7 @@
     <!--Titulo-->
     <title>Help-Desk</title>
     <meta name="viewport" content="width-device-width, initial-scale=1.0, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Logo-->
     <link rel="shortcut icon" href="img/logo.ico" />
     <!--CSS-->
@@ -14,46 +15,43 @@
 </head>
 
 <body>
-    <header>
-        <!--Menú-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
-                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#">Help-DesK</a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav ml-md-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Soporte técnico</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">FAQ</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Iniciar sesión</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary flag_background" href="#">Registrarme</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!-- Banner -->
-        <div class="banner_welcome">
-            <div class="col-md-6">
-                <h2>Test</h2>
-                <p>
-                    Curabitur et sem eget nibh auctor cursus cursus at erat. Proin aliquet pretium ante ac dictum.
-                    Aliquam
-                    id tincidunt metus. Praesent vulputate ullamcorper ante, nec eleifend libero placerat at. Nam
-                    consequat
-                    magna at mi tempor sollicitudin. In sit amet fringilla diam. Vivamus sit amet neque libero.
-                </p>
-            </div>
+    <!--Menú-->
+    <nav class="navbar navbar_main navbar-expand-lg navbar-light bg-light sticky-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">Help-DesK</a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav ml-md-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Soporte técnico</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">FAQ</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Iniciar sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary flag_background" href="#">Registrarme</a>
+                </li>
+            </ul>
         </div>
-    </header>
-
+    </nav>
+    <!-- Banner -->
+    <div class="banner_welcome">
+        <div class="col-md-6">
+            <h2>Test</h2>
+            <p>
+                Curabitur et sem eget nibh auctor cursus cursus at erat. Proin aliquet pretium ante ac dictum.
+                Aliquam
+                id tincidunt metus. Praesent vulputate ullamcorper ante, nec eleifend libero placerat at. Nam
+                consequat
+                magna at mi tempor sollicitudin. In sit amet fringilla diam. Vivamus sit amet neque libero.
+            </p>
+        </div>
+    </div>
     <!-- -->
     <div class="main">
         <div class="container-fluid">
@@ -70,7 +68,8 @@
                         <img src="./img/avatar.png" alt="">
                         <div class="pb_data">
                             <h6>¿Pregunta #1 ......... ?</h6>
-                            <span>@Usuario01</span>
+                            <span class="sm_user">@Usuario01 </span>
+                            <span class="sm_desc"><i class="material-icons align-middle">event</i> Última actualización: 30/8/2020</span>
                         </div>
                         <span class="flag_rpl flag_yellow">2 <span
                                 class="d-none d-sm-none d-md-inline-block">respuestas</span></span>
@@ -112,27 +111,34 @@
                                 class="d-none d-sm-none d-md-inline-block">respuestas</span></span>
                     </li>
                     <div class="float-right">
-                        ¿Buscas algo en concreto? <button type="button" class="btn btn-outline-primary ml-md-3">¡Explora con nosotros!</button>
+                        ¿Buscas algo en concreto? <button type="button" class="btn btn-outline-primary ml-md-3">¡Explora
+                            con nosotros!</button>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Tarjetas  de presentacion -->
+    </div>
+    <div style="background: #000;width: 100%">
+        <h1>¡Conoce!</h1>
+    </div>
+    <div class="main">
         <div class="container-fluid">
-            <div class="row justify-content-md-center">
-                <ul class="list-group col-md-3">
-                    <li class="list-group-item disabled" aria-disabled="true">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                </ul>
-                <ul class="list-group col-md-3">
-                    <li class="list-group-item disabled" aria-disabled="true">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                </ul>
-                <ul class="list-group col-lg-3 col-md-4">
-                    <li class="list-group-item disabled" aria-disabled="true">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                </ul>
+            <!-- Tarjetas  de presentacion -->
+            <div class="container-fluid">
+                <div class="row justify-content-md-center">
+                    <ul class="list-group col-md-3">
+                        <li class="list-group-item card_icon" aria-disabled="true"><i class="material-icons">loyalty</i></li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                    </ul>
+                    <ul class="list-group col-md-3">
+                        <li class="list-group-item disabled" aria-disabled="true">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                    </ul>
+                    <ul class="list-group col-lg-3 col-md-4">
+                        <li class="list-group-item disabled" aria-disabled="true">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

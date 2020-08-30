@@ -16,6 +16,14 @@ li{
     background: $bg_color;
     color: $text_color;
     padding: 3em 2em;
+    color: #FFFFFF;
+    padding: 3em 2em;
+    background: linear-gradient(rgb($bg_color,.5), rgba($bg_color,.5)), url(https://cdn.pixabay.com/photo/2015/05/15/14/38/computer-768608_960_720.jpg);
+    /* Copyright https://pixabay.com/es/photos/equipo-ordenador-port%C3%A1til-tecnolog%C3%ADa-768608/ */
+    background-position: right;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 .pb_cont{
@@ -36,6 +44,15 @@ li{
         margin: 0;
         color: $text_high;
     }
+    i{
+        font-size: 18px;
+    }
+    .sm_user{
+        font-size: 14px;
+    }
+    .sm_desc{
+        font-size: 12px;
+    }
 }
 
 .main{
@@ -44,7 +61,7 @@ li{
 
 .row_mn_main li{
     padding: 0.5em;
-    border: 1px solid #d8d8d8;
+    border: 1px solid #eaeaea;
     margin-bottom: 0.5em;
 }
 
@@ -52,9 +69,27 @@ li{
     float: right;
     padding: 5px 20px;
     color: #FFF;
-    margin-top: -10px;
+    font-weight: bold;
+    span{
+        font-weight: normal;
+    }
+}
+
+.navbar_main{
+    border-bottom: 3px solid $bg_color;
+    .nav-link{
+        color: $text_high!important;
+    }
 }
 
 .flag_green{background: #3c9650;border: 1px solid #256b34;}
 .flag_yellow{background: #b5b714;border: 1px solid #809821;}
 .flag_background{background: $text_high;border-color:$bg_color;}
+
+.card_icon{
+    i{
+        font-size: 15rem;
+    }
+}
+
+@import './fonts.scss';
