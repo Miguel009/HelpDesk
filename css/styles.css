@@ -11,9 +11,9 @@ li {
 .nvb_main_logo {
   background-image: url(/img/lg_light.png);
   width: 155px;
-  background-repeat: no-repeat;
   background-size: 100%;
   height: 37px;
+  background-repeat: no-repeat;
 }
 
 .navcolor_main {
@@ -63,6 +63,7 @@ li {
 
 .main {
   padding: 1em;
+  background: #f8f9fa;
 }
 
 .row_mn_main li {
@@ -88,6 +89,15 @@ li {
   color: #d81b60 !important;
 }
 
+.banner_sm {
+  color: #880E4F;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-bottom: 1px solid #880E4F;
+  margin-bottom: 1em;
+  padding: 0.5em;
+}
+
 .flag_green {
   background: #3c9650;
   border: 1px solid #256b34;
@@ -103,15 +113,25 @@ li {
   border-color: #880E4F;
 }
 
+.category_cont {
+  margin-bottom: 1em;
+  padding: 1em 0 1em 0;
+}
+.category_cont:hover {
+  cursor: pointer;
+  background: #eaeaea;
+}
+
 .card_icon {
-  font-weight: bold;
+  text-align: center;
 }
 .card_icon li {
   font-size: 8px;
 }
 .card_icon i {
-  font-size: 4rem;
-  padding: 0.5rem;
+  font-size: 2.5rem;
+  padding: 0.3em;
+  text-align: center;
   background: #880E4F;
   color: #FFFFFF;
 }
@@ -155,9 +175,9 @@ li {
     font-size: 8px;
   }
   .card_icon i {
-    font-size: 4rem;
-    padding: 0.3em;
-    background: #880E4F;
+    font-size: 0.1rem;
+    padding: 0.2em;
+    background: #9C27B0, #673ab7, #4caf50, #f44336;
     color: #FFFFFF;
   }
   .card_icon span {
