@@ -2,10 +2,13 @@ $bg_color: #880E4F;
 $text_color: #FFFFFF;
 $bgpag_color: #fbfbfb;
 $text_high: #d81b60;
+
+
 $bg_dark: #202124;
 $bg_light: #f8f9fa;
 $bg_light_select: #eaeaea;
-$category_bgs: #9C27B0, #673ab7, #4caf50, #f44336;
+
+
 body{
     margin: 0;
     background: $bgpag_color;
@@ -42,19 +45,18 @@ li{
 }
 
 .pb_cont{
+    display: flex;
     img{
         width: 64px;
         height: 64px;
         display:inline-block;
     }
     div{
-        display: inline-block;
-        vertical-align: middle;
+        align-items: center;
     }
 }
 
 .pb_data{
-    margin-left: 0.5em;
     h6{
         margin: 0;
         color: $text_high;
@@ -82,9 +84,12 @@ li{
 }
 
 .flag_rpl{
-    float: right;
+    text-align: center;
+    align-items: center;
     padding: 5px 20px;
     color: #FFF;
+    display: flex!important;
+    flex-direction: column;
     font-weight: bold;
     span{
         font-weight: normal;
@@ -100,10 +105,10 @@ li{
 
 
 .banner_sm{
-    color: $bg_color;
+    color: $text_high;
     font-size: 1.1rem;
     font-weight: bold;
-    border-bottom: 1px solid $bg_color;
+    border-bottom: 1px solid $text_high;
     margin-bottom:1em;
     padding:0.5em;
 }
@@ -114,11 +119,15 @@ li{
 .category_cont{
     margin-bottom: 1em;
     padding: 1em 0 1em 0;
+    transition: 0.2s;
+
     &:hover{
         cursor: pointer;
         background: $bg_light_select;
     }
 }
+$category_bgs: #9C27B0, #673ab7, #4caf50, #f44336;
+
 .card_icon{
     text-align: center;
     li{

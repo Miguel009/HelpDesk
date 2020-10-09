@@ -34,19 +34,18 @@ li {
   background-size: 100%;
 }
 
+.pb_cont {
+  display: flex;
+}
 .pb_cont img {
   width: 64px;
   height: 64px;
   display: inline-block;
 }
 .pb_cont div {
-  display: inline-block;
-  vertical-align: middle;
+  align-items: center;
 }
 
-.pb_data {
-  margin-left: 0.5em;
-}
 .pb_data h6 {
   margin: 0;
   color: #d81b60;
@@ -73,9 +72,12 @@ li {
 }
 
 .flag_rpl {
-  float: right;
+  text-align: center;
+  align-items: center;
   padding: 5px 20px;
   color: #FFF;
+  display: flex !important;
+  flex-direction: column;
   font-weight: bold;
 }
 .flag_rpl span {
@@ -90,10 +92,10 @@ li {
 }
 
 .banner_sm {
-  color: #880E4F;
+  color: #d81b60;
   font-size: 1.1rem;
   font-weight: bold;
-  border-bottom: 1px solid #880E4F;
+  border-bottom: 1px solid #d81b60;
   margin-bottom: 1em;
   padding: 0.5em;
 }
@@ -116,6 +118,7 @@ li {
 .category_cont {
   margin-bottom: 1em;
   padding: 1em 0 1em 0;
+  transition: 0.2s;
 }
 .category_cont:hover {
   cursor: pointer;
