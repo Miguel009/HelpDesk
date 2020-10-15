@@ -293,4 +293,36 @@ li {
   font-feature-settings: "liga";
 }
 
+.content_contact {
+  background-color: #880e4f;
+  color: #ffffff;
+  text-align: left;
+  height: 3em;
+  padding-top: 0.45em;
+}
+
+.form_content_contact {
+  background-color: #eaeaea;
+  padding: 0.2em;
+  margin-bottom: 10px;
+}
+
+.form_text_label {
+  color: #202124;
+}
+
+.label_contact {
+  color: #202124;
+  margin-top: 12px;
+}
+
+.map_contact {
+  width: 100%;
+  height: 300px;
+}
+
+.label_info_contact {
+  font-size: 0.9em;
+}
+
 /*# sourceMappingURL=styles.css.map */
