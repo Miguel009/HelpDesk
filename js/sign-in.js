@@ -22,10 +22,10 @@ function init(){
                             key: snapshot.key
                         }
                         if (result.isConfirmed) {
-                            localStorage.setItem('user', JSON.stringify(user));
+                           localStorage.setItem('user', JSON.stringify(user));
                             window.location.href = "./index.html";
                         } else if (result.isDenied) {
-                            localStorage.setItem('user', email.value);
+                            localStorage.setItem('user', JSON.stringify(user));
                             window.location.href = "./index.html";
                         }
                     })

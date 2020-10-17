@@ -101,7 +101,6 @@ function colorCategory() {
 
     title[2].onclick = function(e)
     {
-        console.log("alho");
         if (title[2].textContent != "Iniciar Sesion") {
             update(user);
         } else {
