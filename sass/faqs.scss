@@ -1,0 +1,45 @@
+$bg_color: #880e4f;
+$text_color: #ffffff;
+$bgpag_color: #fbfbfb;
+$text_high: #d81b60;
+$bgpag_ligh: #fff;
+$bg_dark: #202124;
+$bg_light: #f8f9fa;
+$bg_light_select: #eaeaea;
+
+.collapse-background {
+	background: $bg_color;
+	border-color: $bg_color;
+	button {
+		font-weight: bolder;
+		margin: 0em auto;
+		i {
+			float: right;
+		}
+		p {
+			margin-right: 2em;
+		}
+	}
+}
+
+.collapse-header {
+	color: $text_color;
+	&:hover {
+		color: $text_color;
+		text-decoration: none;
+	}
+	&:active,
+	&:focus {
+		color: $text_color;
+		text-decoration: none;
+	}
+}
+
+#title-faq {
+	text-align: center;
+	margin: 0.5em auto 1em;
+}
+
+div .content {
+	text-align: justify;
+}
