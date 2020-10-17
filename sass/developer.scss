@@ -1,0 +1,55 @@
+$text_title_dev: #880e4f;
+$text_body_dev: #d81b60;
+
+.title_dev{
+    color: $text_title_dev;
+}
+
+.body_dev{
+    color: $bg_dark;
+}
+
+.content_dev{
+    padding: 1em;
+    margin-top: 0.9em;
+    border: 2px solid $text_title_dev;
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+    .title_dev{
+        text-align: center;
+        font-size: 16px;
+    }
+    
+    .body_dev{
+        text-align: center;
+        font-size: 12px;
+    }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {
+    .title_dev{
+        text-align: center;
+        font-size: 17px;
+    }
+    
+    .body_dev{
+        text-align: center;
+        font-size: 13px;
+    }
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+    .title_dev{
+        text-align: justify;
+        font-size: 20px;
+    }
+    
+    .body_dev{
+        text-align: justify;
+        font-size: 15px;
+    }
+}
