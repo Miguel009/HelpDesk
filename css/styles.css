@@ -292,7 +292,6 @@ li {
   /* Support for IE. */
   font-feature-settings: "liga";
 }
-
 .content_contact {
   background-color: #880e4f;
   color: #ffffff;
@@ -324,5 +323,9 @@ li {
 .label_info_contact {
   font-size: 0.9em;
 }
+.btn2{
+  margin-right: 5px;
+}
+
 
 /*# sourceMappingURL=styles.css.map */
