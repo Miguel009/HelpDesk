@@ -33,30 +33,44 @@
                 </li>
             </ul>
             <li class="nav-item active nav_li_main">
-                <a class="nav-link">Iniciar sesión</a>
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">Iniciar sesión</a>
             </li>
             <li class="nav-item nav_li_main">
                 <a class="btn btn-primary flag_background" id="buton-menu" href="#">Registrarme</a>
             </li>
         </div>
     </nav>
-    <div class="container">
-        <div class="row">
-            <div class="col col-lg-8 col-sm-12 col-sm-12 offset-lg-2">
-                <form action="javascript:void(0)">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control" id="Email" aria-describedby="emailHelp">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Contraseña</label>
-                      <input type="password" class="form-control" id="password">
-                    </div>
-                    <button type="submit" class="btn btn-primary flag_background" id="signin">Ingresar</button>
-                  </form>
+    <!-- Banner -->
+    <div class="banner_welcome">
+        <div class="col-md-6">
+            <h2>Test</h2>
+            <p>
+                Curabitur et sem eget nibh auctor cursus cursus at erat. Proin aliquet pretium ante ac dictum.
+                Aliquam
+                id tincidunt metus. Praesent vulputate ullamcorper ante, nec eleifend libero placerat at. Nam
+                consequat
+                magna at mi tempor sollicitudin. In sit amet fringilla diam. Vivamus sit amet neque libero.
+            </p>
+        </div>
+    </div>
+    <!--CHAT-->
+    <div class="mt-4 container content_chat">
+        <div class="chat_header">
+            Sala de chat
+        </div>
+        <div class="chat_room" id="chat_room" data-spy="scroll">
+        </div>
+        <div class="input_content">
+            <div class="d-table-cell w-100">
+                <input type="text" class="form-control rounded-0" id="textbox">
+            </div>
+             <div class="d-table-cell align-middle">
+                <button id="enter" class="btn btn-primary flag_background btn_margin rounded-0">enter</button>
             </div>
         </div>
     </div>
+    
+    <div id="red"></div>
     <footer>
         <div class="sec_footer">
             <span>© 2020 Help Desk | Todos los derechos reservados. Creada con el apoyo de la Universidad Don
@@ -67,29 +81,28 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script type="text/javascript" src="js/sign-in.js"></script>
-        <script type="text/javascript" src="js/home.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
+    <script type="text/javascript" src="js/home.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
 
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-            https://firebase.google.com/docs/web/setup#available-libraries -->
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
 
         <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
-            apiKey: "AIzaSyBOtxiziXqHE3zm22Xw2M8L5SgevmNAcbo",
-            authDomain: "proyectosfr.firebaseapp.com",
-            databaseURL: "https://proyectosfr.firebaseio.com",
-            projectId: "proyectosfr",
-            storageBucket: "proyectosfr.appspot.com",
-            messagingSenderId: "349313304698",
-            appId: "1:349313304698:web:7c1ac30cf22842a849d3c3"
+        apiKey: "AIzaSyBOtxiziXqHE3zm22Xw2M8L5SgevmNAcbo",
+        authDomain: "proyectosfr.firebaseapp.com",
+        databaseURL: "https://proyectosfr.firebaseio.com",
+        projectId: "proyectosfr",
+        storageBucket: "proyectosfr.appspot.com",
+        messagingSenderId: "349313304698",
+        appId: "1:349313304698:web:7c1ac30cf22842a849d3c3"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         </script>
+    <script type="text/javascript" src="js/chat.js"></script>
 </body>
 
 </html>

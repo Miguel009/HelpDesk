@@ -292,41 +292,6 @@ li {
   /* Support for IE. */
   font-feature-settings: "liga";
 }
-.content_contact {
-  background-color: #880e4f;
-  color: #ffffff;
-  text-align: left;
-  height: 3em;
-  padding-top: 0.45em;
-}
-
-.form_content_contact {
-  background-color: #eaeaea;
-  padding: 0.2em;
-  margin-bottom: 10px;
-}
-
-.form_text_label {
-  color: #202124;
-}
-
-.label_contact {
-  color: #202124;
-  margin-top: 12px;
-}
-
-.map_contact {
-  width: 100%;
-  height: 300px;
-}
-
-.label_info_contact {
-  font-size: 0.9em;
-}
-.btn2{
-  margin-right: 5px;
-}
-
 
 .title_dev {
   color: #880e4f;
@@ -340,6 +305,40 @@ li {
   padding: 1em;
   margin-top: 0.9em;
   border: 2px solid #880e4f;
+}
+
+.chat_room{
+  width: 100%;
+  height: 500px;
+}
+
+.content_chat{
+  border: 3px #880e4f solid;
+  padding: 0 !important;
+}
+
+.chat_header{
+  text-align: center;
+  background: #880e4f;
+  color: white;
+  font-size: 20px;
+  padding: 1rem;
+}
+
+.btn_margin{
+  margin-right: -1px;
+}
+
+.othermessage{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.mymessage{
+  background-color: #d81b60;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  float: right;
 }
 
 @media (max-width: 575.98px) {
@@ -374,6 +373,71 @@ li {
     text-align: justify;
     font-size: 15px;
   }
+}
+.content_contact {
+  background-color: #880e4f;
+  color: #ffffff;
+  text-align: left;
+  height: 3em;
+  padding-top: 0.45em;
+}
+
+.form_content_contact {
+  background-color: #eaeaea;
+  padding: 0.2em;
+  margin-bottom: 10px;
+}
+
+.form_text_label {
+  color: #202124;
+}
+
+.label_contact {
+  color: #202124;
+  margin-top: 12px;
+}
+
+.map_contact {
+  width: 100%;
+  height: 300px;
+}
+
+.label_info_contact {
+  font-size: 0.9em;
+}
+
+.span_edge {
+  position: absolute;
+  right: 0px;
+  top: 0;
+  background-color: #880e4f;
+  color: #f8f9fa;
+  font-size: 0.6em;
+  height: 31px;
+  padding: 2px;
+  margin: 1%;
+}
+
+.text_btn_edge {
+  color: #d81b60;
+  font-size: 19px;
+}
+.text_btn_edge:hover {
+  color: #880e4f;
+}
+
+.label_btn {
+  font-size: 15px !important;
+}
+
+.card_edge_bg {
+  background-color: #fff;
+}
+
+.body_text_edge {
+  font-size: 14.5px;
+  color: #202124;
+  background-color: #eaeaea;
 }
 
 /*# sourceMappingURL=styles.css.map */

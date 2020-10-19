@@ -1,0 +1,34 @@
+.span_edge{
+    position: absolute;
+    right: 0px;
+    top: 0;
+    background-color: $bg_color;
+    color: $bg_light;
+    font-size: 0.6em;
+    height: 31px;
+    padding: 2px;
+    margin: 1%;
+
+}
+
+.text_btn_edge{
+    color: $text_high;
+    font-size: 19px;
+    &:hover{
+        color: $bg_color;
+    }
+}
+
+.label_btn{
+    font-size: 15px !important;
+}
+
+.card_edge_bg{
+    background-color: $bgpag_ligh;
+}
+
+.body_text_edge{
+    font-size: 14.5px;
+    color: $bg_dark;
+    background-color: $bg_light_select;
+}
