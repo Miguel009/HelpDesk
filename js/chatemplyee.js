@@ -33,8 +33,8 @@ function chatroom(){
         } else {
             document.getElementById("chat_room").innerHTML += "<span class='othermessage bg-secondary rounded text-white'>"+snapshot.val().message+"</span><br><br>";
         }
-        
         console.log(snapshot.val().message);
+        document.getElementById("chat_room").scrollTop =document.getElementById("chat_room").scrollHeight;
     });
 }
 
