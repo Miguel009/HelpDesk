@@ -54,10 +54,10 @@ function colorCategory() {
     var signout = document.getElementById("buton-menu");
     if (user!=null) {
         var split = user.email.split('@');
-        title[2].textContent = split[0];
+        title[5].textContent = split[0];
         signout.textContent = "Cerrar Sesion";
     } else {
-        title[2].textContent = "Iniciar Sesion";
+        title[5].textContent = "Iniciar Sesion";
         signout.textContent = "Registrarme";
     }
     
@@ -103,9 +103,9 @@ function colorCategory() {
         }
     };
 
-    title[2].onclick = function(e)
+    title[5].onclick = function(e)
     {
-        if (title[2].textContent != "Iniciar Sesion") {
+        if (title[5].textContent != "Iniciar Sesion") {
             update(user);
         } else {
             window.location.href = "./sign-in.html";
