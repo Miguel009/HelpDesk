@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase/firebase";
+import { db } from "../../firebase/firebase";
 import Swal from "sweetalert2"
 
 const Faqsemployee = () => {
@@ -16,6 +16,17 @@ const faqRef = db.ref('FAQS');
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
+  const emptyspaces = (values)=>{
+    var n;
+    for (n in values) {
+      if (typeof values[n] != 'object') {
+        if (values[n].trim()==="" && n!=="Actualizacion" && n!=="Respuestas") {
+          return true
+        }
+      }
+    }
+    return false
+  }
   const getFAQById = async (id) => {
     faqRef.orderByKey().equalTo(id).on('value', snapshot => {
         snapshot.forEach(function(childSnapshot) {
@@ -54,13 +65,25 @@ const faqRef = db.ref('FAQS');
   const addOrEditFAQ = async (e) => {
     e.preventDefault();
     try {
+      if (!emptyspaces(values)) {
+
       if (currentId === "") {
         const autoid = faqRef.push().key
         faqRef.child(autoid).set(values);
       } else {
         faqRef.child(currentId).update(values);
         setCurrentId("");
-      }
+      }         
+    }
+    else
+    {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Hay espacios en blanco',
+        icon: 'error',
+        confirmButtonText: 'Entendido'
+        })
+    }
     } catch (error) {
       console.error(error);
     }

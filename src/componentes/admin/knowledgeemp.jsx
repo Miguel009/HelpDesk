@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase/firebase";
+import { db } from "../../firebase/firebase";
 import Swal from "sweetalert2"
 
 const Knowledgeemp = () => {
@@ -12,7 +12,8 @@ const faqRef = db.ref('Knowled');
     Descripcion: "",
     User: "Users",
     Categoria: "Hardware",
-    Respuestas: [{}]
+    Respuestas: [{}],
+    Actualizacion: ""
   };
   const [values, setValues] = useState(initialStateValues);
   const handleInputChange = (e) => {
@@ -26,6 +27,17 @@ const faqRef = db.ref('Knowled');
           });
     });
   };
+  const emptyspaces = (values)=>{
+    var n;
+    for (n in values) {
+      if (typeof values[n] != 'object') {
+        if (values[n].trim()==="" && n!=="Actualizacion" && n!=="Respuestas") {
+          return true
+        }
+      }
+    }
+    return false
+  }
   const getFAQS = async () => {
     faqRef.orderByKey().on('value', snapshot => {
         let docs=[];
@@ -42,6 +54,16 @@ const faqRef = db.ref('Knowled');
     }
   };
 
+  const clean = ()=>{
+    if (currentId==="") {
+      setValues(initialStateValues);
+    }
+    else
+    {
+    setCurrentId("");
+    }
+  }
+
   useEffect(() => {
     getFAQS();
     if (currentId === "") {
@@ -57,17 +79,38 @@ const faqRef = db.ref('Knowled');
   const addOrEditFAQ = async (e) => {
     e.preventDefault();
     try {
-      if (currentId === "") {
-        const autoid = faqRef.push().key
-        faqRef.child(autoid).set(values);
-      } else {
-        faqRef.child(currentId).update(values);
-        setCurrentId("");
-      }
+      if (!emptyspaces(values)) {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var H = today.getHours();
+        var n = today.getMinutes();
+        if (n<10) {
+          n="0"+n;
+        }
+        today = dd + '/' + mm + '/' + yyyy+' a las '+H+':'+n;
+        const autoid = faqRef.push().key;
+        const val ={...values, ["Actualizacion"]:today}
+        if (currentId === "") {
+          await faqRef.child(autoid).set(val);
+        } else {
+          await faqRef.child(currentId).update(val);
+          setCurrentId("");
+        }
+        setValues(initialStateValues);
+    }else
+    {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Hay espacios en blanco',
+        icon: 'error',
+        confirmButtonText: 'Entendido'
+        })
+    }
     } catch (error) {
       console.error(error);
     }
-    setValues(initialStateValues);
   };
 
   return (
@@ -116,9 +159,14 @@ const faqRef = db.ref('Knowled');
                <option>Internet y Conectividad</option>
     </select>
     </div>
-      <button className="btn btn-primary btn-block buton">
+    <div className="form-group input-group">
+      <button className="btn btn-primary btn2">
         {currentId === "" ? "Guardar" : "Actualizar"}
       </button>
+      <button onClick={clean} type="reset" className="btn btn-secondary">
+        Limpiar
+      </button>
+      </div>
     </form>
       </div>
       <div className="col-md-8 p-2 text-center">
@@ -130,6 +178,8 @@ const faqRef = db.ref('Knowled');
                 <th scope="col">Problema</th>
                 <th scope="col">Descripcion</th>
                 <th scope="col">Categoria</th>
+                <th scope="col">Cantidad de Respuestas</th>
+                <th scope="col">Ultima Actualizacion</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -139,6 +189,8 @@ const faqRef = db.ref('Knowled');
                   <td>{Faq.Problema}</td>
                   <td>{Faq.Descripcion}</td>
                   <td>{Faq.Categoria}</td>
+                  <td>{Faq.Respuestas===undefined? 0: Faq.Respuestas.length}</td>
+                  <td>{Faq.Actualizacion}</td>
                   <td>
                     <button className="btn btn-primary buton" onClick={() => setCurrentId(Faq.id)}>Editar</button>
                     &nbsp;

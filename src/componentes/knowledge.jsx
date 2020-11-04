@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
+import Swal from "sweetalert2";
 function Knowledge() {
   const knowRef = db.ref('Knowled');
   const [Know, setKnow] = useState([]);
@@ -7,18 +8,28 @@ function Knowledge() {
   const [currentId2, setCurrentId2] = useState("");
   const [currentPos, setcurrentPos] = useState("");
   const [respuestasOform, setRespuestasOform] = useState(true);
+  var userlog = JSON.parse(localStorage.getItem("user"));
+  var users = "";
+  if (userlog == null) {
+    users="Users"
+  }
+  else
+  {
+   var partes = userlog.email.split("@")
+    users=partes[0]
+  }
   let FaqNum = 0;
   const initialStateValues = {
     Problema: "",
     Descripcion: "",
-    User: "Users",
+    User: users,
     Categoria: "Hardware",
-    Respuestas: [{}]
+    Respuestas: [{}],
+    Actualizacion: ""
   };
-
   const respuestas = {
     Respuesta:"",
-    User:"Users"
+    User:users
   };
   const [values, setValues] = useState(initialStateValues);
   const [values2, setValues2] = useState(respuestas);
@@ -58,36 +69,92 @@ function Knowledge() {
     }
   };
 
+  const emptyspaces = (values)=>{
+    var n;
+    for (n in values) {
+      if (typeof values[n] != 'object') {
+        if (values[n].trim()==="" && n!=="Actualizacion" && n!=="Respuestas") {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
   const addOrEditKnow = async (e) => {
     e.preventDefault();
     try {
+      if (!emptyspaces(values)) {
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+      var H = today.getHours();
+      var n = today.getMinutes();
+      if (n<10) {
+        n="0"+n;
+      }
+      today = dd + '/' + mm + '/' + yyyy+' a las '+H+':'+n;
+      const autoid = knowRef.push().key;
+      const val ={...values, ["Actualizacion"]:today}
       if (currentId === "") {
-        const autoid = knowRef.push().key;
-        await knowRef.child(autoid).set(values);
+        await knowRef.child(autoid).set(val);
       } else {
-        await knowRef.child(currentId).update(values);
+        await knowRef.child(currentId).update(val);
         setCurrentId("");
+      }
+      setValues(initialStateValues);
+      }
+      else
+      {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Hay espacios en blanco',
+          icon: 'error',
+          confirmButtonText: 'Entendido'
+          })
       }
     } catch (error) {
       console.error(error);
     }
-    setValues(initialStateValues);
   };
-  const addOrEditanswer = async (e, num) => {
+  const addOrEditanswer = async (e) => {
     const knowRefs2= db.ref('Knowled/'+currentId2+'/Respuestas')
     e.preventDefault();
     try {
+      if (!emptyspaces(values2)) {
       //if (currentId === "") {
         let array = Know[currentPos].Respuestas;
         let numero = 0;
-        if (array != undefined) {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var H = today.getHours();
+        var n = today.getMinutes();
+        if (n<10) {
+          n="0"+n;
+        }
+        today = dd + '/' + mm + '/' + yyyy+' a las '+H+':'+n;
+        if (array !== undefined) {
           numero = array.length;
         }
         await knowRefs2.child(numero).set(values2);
+        await knowRef.child(currentId2).update({Actualizacion:today});
       /*} else {
         knowRefs2.child(currentId).update(values2);
         setCurrentId("");
       }*/
+    }
+    else
+    {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Hay espacios en blanco',
+        icon: 'error',
+        confirmButtonText: 'Entendido'
+        })
+    }
     } catch (error) {
       console.error(error);
     }
@@ -106,6 +173,11 @@ function Knowledge() {
     setCurrentId("");
   }
 
+  const updates = (id) => {
+    setRespuestasOform(true);
+    setCurrentId(id);
+  }
+
   useEffect(() => {
     getKnows();
   }, []);
@@ -116,7 +188,6 @@ function Knowledge() {
     } else {
       //https://stackoverflow.com/questions/56059127/how-to-fix-this-error-function-collectionreference-doc
       if (currentId !== null && currentId !== undefined) {
-        setRespuestasOform(true);
         getKnowById(currentId);
       }
     }
@@ -129,7 +200,12 @@ function Knowledge() {
                   <div className="container-fluid">
                       <h2 id="title-faq">Base de Conocimiento</h2>
                   </div>
-                  <button className="btn flag_background text-white" id="submit" onClick={defaults} data-toggle="modal" data-target="#exampleModa2">Nuevo</button>
+                  {
+                    userlog!=null?
+                      <button className="btn flag_background text-white" id="submit" onClick={defaults} data-toggle="modal" data-target="#exampleModa2">Nuevo</button>
+                      :
+                      null
+                  }
                   <div className="accordion" id="faqgroup">
                   {
                   Know.map((know) => (
@@ -148,7 +224,7 @@ function Knowledge() {
                                       <br/>
                                       <label className="label_btn">{"Por @"+know.User}</label>
                                   </button>
-                                  <span className="span_edge">{know.Respuestas==undefined? 0: know.Respuestas.length} respuestas</span>
+                                  <span className="span_edge">{know.Respuestas===undefined? 0: know.Respuestas.length} respuestas</span>
                               </h2>
                           </div>
                           <div
@@ -161,16 +237,26 @@ function Knowledge() {
                                   {know.Descripcion}
                               </div>
                               <div className="card-footer body_text_edge">
-                                  <button className="btn btn-success text-white btn2" id="submit" data-toggle="modal" onClick={() => abrir(know.id, know.num)}  data-target="#exampleModa2">Ver Respuestas o Responder</button>
-                                  <button className="btn btn-secondary text-white btn2" onClick={() => setCurrentId(know.id)} data-toggle="modal" data-target="#exampleModa2">Editar</button>
-                                  <button className="btn btn-danger text-white" onClick={() => onDeleteKnow(know.id)}>Eliminar</button>
+                              <button className="btn btn-success text-white btn2" id="submit" data-toggle="modal" onClick={() => abrir(know.id, know.num)}  data-target="#exampleModa2">Ver Respuestas o Responder</button>
+                                {
+                                  userlog!=null?
+                                    users===know.User?
+                                      <>
+                                      <button className="btn btn-secondary text-white btn2" onClick={() => updates(know.id)} data-toggle="modal" data-target="#exampleModa2">Editar</button>
+                                      <button className="btn btn-danger text-white" onClick={() => onDeleteKnow(know.id)}>Eliminar</button>
+                                      </>
+                                    :
+                                    null
+                                  :
+                                  null
+                                }
                               </div>
                           </div>
                       </div>
                   )
                   )}
                   </div>
-                  </div>
+              </div>
      <div className="modal fade" id="exampleModa2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
      <div className="modal-dialog">
        <div className="modal-content">
@@ -208,27 +294,36 @@ function Knowledge() {
            <>
            <div className="answersplace" data-spy="scroll">
           {
-          Know[currentPos].Respuestas!=undefined?
+           Know[currentPos] !== undefined?  
+          Know[currentPos].Respuestas!==undefined?
           Know[currentPos].Respuestas.map((resp) =>(
               <div className="alert alert-primary" role="alert">
                <strong>{resp.User}</strong> Dice: {resp.Respuesta}
               </div>
            )):
           <h1>No hay comentarios :c</h1>
+          :
+          null
           }
            </div>
+           {userlog!=null?
            <form>
              <div className="form-group">
                <label htmlFor="recipient-name" className="col-form-label" >Respuesta:</label>
                <textarea type="text" className="form-control" value={values2.Respuesta} name="Respuesta" onChange={handleInputChange2}></textarea>
              </div>
-            </form>
+            </form>:
+            null
+            }
             </>
            }
          </div>
          <div className="modal-footer">
            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-           <button type="submit" className="btn btn-success" data-dismiss="modal" onClick={respuestasOform?addOrEditKnow:addOrEditanswer}>Send message</button>
+           {userlog!=null?
+           <button type="submit" className="btn btn-success" data-dismiss={respuestasOform?"modal":null} onClick={respuestasOform?addOrEditKnow:addOrEditanswer}>Send message</button>
+           :null
+           }
          </div>
        </div>
      </div>

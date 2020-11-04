@@ -7,8 +7,11 @@ import Faq from "./componentes/faq"
 import Knowledge from "./componentes/knowledge"
 import Register from "./componentes/register"
 import SignIn from "./componentes/sign-in"
-import Faqsemployee from "./componentes/faqsemployee"
-import Knowledgeemp from "./componentes/knowledgeemp"
+import Faqsemployee from "./componentes/admin/faqsemployee"
+import Knowledgeemp from "./componentes/admin/knowledgeemp"
+import LastUpdates from "./componentes/lastupdates"
+import ChatEmployee from "./componentes/admin/chatemployee"
+import AdminSignIn from "./componentes/admin/signadmin"
 import Swal from "sweetalert2";
 import { db } from "./firebase/firebase";
 import React, {useState } from "react";
@@ -28,6 +31,16 @@ function App() {
         setValues({ ...values, [name]: value });
       };
         var user = JSON.parse(localStorage.getItem("user"));
+        var admin = JSON.parse(localStorage.getItem("admin"));
+        var users = "";
+        if (user == null) {
+            users="Users"
+        }
+        else
+        {
+        var partes = user.email.split("@")
+            users=partes[0]
+        }
         function Sesiones(e) {
           e.preventDefault();
           const swalWithBootstrapButtons = Swal.mixin({
@@ -53,10 +66,10 @@ function App() {
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 localStorage.clear();
-                                window.location.href = "./index.html";
+                                window.location.href = "/";
                             } else if (result.isDenied) {
                                 localStorage.clear();
-                                window.location.href = "./index.html";
+                                window.location.href = "/";
                             }
                         })
                 } else {
@@ -74,7 +87,7 @@ function App() {
             }
             console.log(values);
             userRef.orderByKey().equalTo(user.key).on('child_added', snapshot => {
-                if (values.contraseña.trim() !== "" && values.contraseñaN.trim().trim() !== "" && values.contraseñaN2.trim() !== "")
+                if (values.contraseña.trim() !== "" && values.contraseñaN.trim() !== "" && values.contraseñaN2.trim() !== "")
                 {
                     if (values.contraseña === snapshot.val().Passw) {
     
@@ -132,6 +145,10 @@ function App() {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
+
+                {
+                admin==null?
+                <>
                 <li className="nav-item">
                     <NavLink to="chat" className="nav-link">Chat</NavLink>
                 </li>
@@ -147,17 +164,36 @@ function App() {
                 <li className="nav-item">
                     <NavLink to="contact" className="nav-link">Contactos y Contactanos</NavLink>
                 </li>
+                </>
+                :
+                <>
+                <li className="nav-item">
+                <NavLink to="chatemployee" className="nav-link">Chat</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink to="knowledgeemp" className="nav-link">Base de Conocimiento</NavLink>
+                </li>
+                <li className="nav-item">
+                <NavLink to="faqsemployee" className="nav-link">FAQ</NavLink>
+                </li>
+                </>
+                }
+
             </ul>
             <li className="nav-item nav_li_main">
                 {
+                    admin==null?
                     user == null ? <NavLink className="nav-link" to="/sign-in">Iniciar sesión</NavLink>
-                : <a className="nav-link" data-toggle="modal" data-target="#exampleModal">{user.email}</a>
+                : <a className="nav-link" data-toggle="modal" data-target="#exampleModal">{users}</a>
+                :<a className="nav-link" data-toggle="modal" data-target="#exampleModal">{admin.email}</a>
                 }
             </li>
             <li className="nav-item nav_li_main">
                 {
-                    user == null ? <NavLink className="btn text-white flag_background" id="buton-menu" href="#" to="/register">Registrarme</NavLink>
+                    admin==null?
+                    user == null? <NavLink className="btn text-white flag_background" id="buton-menu" href="#" to="/register">Registrarme</NavLink>
                     : <a className="btn text-white flag_background" id="buton-menu" onClick={Sesiones}>Cerrar Sesion</a>
+                    :<a className="btn text-white flag_background" id="buton-menu" onClick={Sesiones}>Cerrar Sesion</a>
                 }
                 
             </li>
@@ -172,8 +208,17 @@ function App() {
         </div>
     </div>
     <Switch>
+    <Route path="/Admin">
+          <AdminSignIn/>
+    </Route>
     <Route path="/faqsemployee">
           <Faqsemployee/>
+    </Route>
+      <Route path="/knowledgeemp">
+          <Knowledgeemp/>
+      </Route>
+      <Route path="/chatemployee">
+          <ChatEmployee/>
       </Route>
       <Route path="/knowledgeemp">
           <Knowledgeemp/>
@@ -205,85 +250,7 @@ function App() {
             <div className="row">
                 <div className="col-md-8 row_mn_main order-md-2">
                     <div className="banner_sm col-sm-12">Últimas actualizaciones</div>
-                    <li className="pb_cont">
-                        <img src="./img/avatar.png" alt=""/>
-                        <div className="pb_data col-auto mr-auto align-self-center">
-                            <h6>¿Pregunta #1 ......... ?</h6>
-                            <span className="sm_user"><span className="align-middle">@Usuario1</span></span>
-                            <span className="sm_desc"><i className="material-icons align-middle">event</i><span
-                                    className="align-middle"> Última
-                                    actualización: 30/8/2020</span></span>
-                        </div>
-                        <div className="flag_rpl flag_green col-auto">
-                            <span className="">10</span><span className="flag_rpl_sub">Respuestas</span>
-                        </div>
-                    </li>
-                    <li className="pb_cont">
-                        <img src="./img/avatar.png" alt=""/>
-                        <div className="pb_data col-auto mr-auto align-self-center">
-                            <h6>¿Pregunta #1 ......... ?</h6>
-                            <span className="sm_user"><span className="align-middle">@Usuario1</span></span>
-                            <span className="sm_desc"><i className="material-icons align-middle">event</i><span
-                                    className="align-middle"> Última
-                                    actualización: 30/8/2020</span></span>
-                        </div>
-                        <div className="flag_rpl flag_green col-auto">
-                            <span className="">10</span><span className="flag_rpl_sub">Respuestas</span>
-                        </div>
-                    </li>
-                    <li className="pb_cont">
-                        <img src="./img/avatar.png" alt=""/>
-                        <div className="pb_data col-auto mr-auto align-self-center">
-                            <h6>¿Pregunta #1 ......... ?</h6>
-                            <span className="sm_user"><span className="align-middle">@Usuario1</span></span>
-                            <span className="sm_desc"><i className="material-icons align-middle">event</i><span
-                                    className="align-middle"> Última
-                                    actualización: 30/8/2020</span></span>
-                        </div>
-                        <div className="flag_rpl flag_green col-auto">
-                            <span className="">10</span><span className="flag_rpl_sub">Respuestas</span>
-                        </div>
-                    </li>
-                    <li className="pb_cont">
-                        <img src="./img/avatar.png" alt=""/>
-                        <div className="pb_data col-auto mr-auto align-self-center">
-                            <h6>¿Pregunta #1 ......... ?</h6>
-                            <span className="sm_user"><span className="align-middle">@Usuario1</span></span>
-                            <span className="sm_desc"><i className="material-icons align-middle">event</i><span
-                                    className="align-middle"> Última
-                                    actualización: 30/8/2020</span></span>
-                        </div>
-                        <div className="flag_rpl flag_green col-auto">
-                            <span className="">10</span><span className="flag_rpl_sub">Respuestas</span>
-                        </div>
-                    </li>
-                    <li className="pb_cont">
-                        <img src="./img/avatar.png" alt=""/>
-                        <div className="pb_data col-auto mr-auto align-self-center">
-                            <h6>¿Pregunta #1 ......... ?</h6>
-                            <span className="sm_user"><span className="align-middle">@Usuario1</span></span>
-                            <span className="sm_desc"><i className="material-icons align-middle">event</i><span
-                                    className="align-middle"> Última
-                                    actualización: 30/8/2020</span></span>
-                        </div>
-                        <div className="flag_rpl flag_green col-auto">
-                            <span className="">10</span><span className="flag_rpl_sub">Respuestas</span>
-                        </div>
-                    </li>
-                    <li className="pb_cont">
-                        <img src="./img/avatar.png" alt=""/>
-                        <div className="pb_data col-auto mr-auto align-self-center">
-                            <h6>¿Pregunta #1 ......... ?</h6>
-                            <span className="sm_user"><span className="align-middle">@Usuario1</span></span>
-                            <span className="sm_desc"><i className="material-icons align-middle">event</i><span
-                                    className="align-middle"> Última
-                                    actualización: 30/8/2020</span></span>
-                        </div>
-                        <div className="flag_rpl flag_green col-auto">
-                            <span className="">10</span><span className="flag_rpl_sub">Respuestas</span>
-                        </div>
-                    </li>
-
+                    <LastUpdates/>
                     <div className="float-right">
                         ¿Buscas algo en concreto? <a href="#" className="ml-md-3">¡Explora
                             con nosotros!</a>
@@ -293,50 +260,50 @@ function App() {
                     <div className="row justify-content-center">
                         <div className="banner_sm col-sm-12">Categorías</div>
                         <ul className="list-group col-4 category_cont" id="home_category_1">
-                            <li className="card_icon" ><i className="material-icons">chat</i>
-                                <span>Categoria #1</span>
+                            <li className="card_icon" ><i className="material-icons">keyboard</i>
+                                <span>Hardware</span>
                             </li>
                         </ul>
                         <ul className="list-group col-4 category_cont" id="home_category_2">
-                            <li className="card_icon" ><i className="material-icons">accessible</i>
-                                <span>Categoria #2</span>
+                            <li className="card_icon" ><i className="material-icons">api</i>
+                                <span>Software</span>
                             </li>
                         </ul>
                         <ul className="list-group col-4 category_cont" id="home_category_3">
                             <li className="card_icon" ><i className="material-icons">build_circle</i>
-                                <span>Categoria #1</span>
+                                <span>Mantenimiento</span>
                             </li>
                         </ul>
                         <ul className="list-group col-4 category_cont" id="home_category_4">
-                            <li className="card_icon" ><i className="material-icons">bug_report</i>
-                                <span>Categoria #2</span>
+                            <li className="card_icon" ><i className="material-icons">laptop</i>
+                                <span>Ordenadores Completos</span>
                             </li>
                         </ul>
                         <ul className="list-group col-4 category_cont" id="home_category_5">
-                            <li className="card_icon" ><i className="material-icons">privacy_tip</i>
-                                <span>Categoria #1</span>
+                            <li className="card_icon" ><i className="material-icons">add_box</i>
+                                <span>Modding</span>
                             </li>
                         </ul>
                         <ul className="list-group col-4 category_cont" id="home_category_6">
                             <li className="card_icon" ><i
-                                    className="material-icons">remove_shopping_cart</i>
-                                <span>Categoria #2</span>
+                                    className="material-icons">sports_esports</i>
+                                <span>Juegos</span>
                             </li>
                         </ul>
                         <ul className="list-group col-4 category_cont" id="home_category_7">
                             <li className="card_icon" ><i
-                                    className="material-icons">supervised_user_circle</i>
-                                <span>Categoria #1</span>
+                                    className="material-icons">ad_units</i>
+                                <span>Moviles</span>
                             </li>
                         </ul>
                         <ul className="list-group col-4 category_cont" id="home_category8">
-                            <li className="card_icon" ><i className="material-icons">touch_app</i>
-                                <span>Categoria #2</span>
+                            <li className="card_icon" ><i className="material-icons">outlet</i>
+                                <span>Electronica de Consumo</span>
                             </li>
                         </ul>
                         <ul className="list-group col-4 category_cont" id="home_category_9">
-                            <li className="card_icon" ><i className="material-icons">equalizer</i>
-                                <span>Categoria #2</span>
+                            <li className="card_icon" ><i className="material-icons">signal_wifi_4_bar</i>
+                                <span>Internet y Conectividad</span>
                             </li>
                         </ul>
                     </div>
