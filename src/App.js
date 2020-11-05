@@ -184,16 +184,16 @@ function App() {
                 {
                     admin==null?
                     user == null ? <NavLink className="nav-link" to="/sign-in">Iniciar sesión</NavLink>
-                : <a className="nav-link" data-toggle="modal" data-target="#exampleModal">{users}</a>
-                :<a className="nav-link" data-toggle="modal" data-target="#exampleModal">{admin.email}</a>
+                : <a className="nav-link" data-toggle="modal" data-target="#exampleModal" href="/#">{users}</a>
+                :<a className="nav-link" data-toggle="modal" data-target="#exampleModal" href="/#">{admin.email}</a>
                 }
             </li>
             <li className="nav-item nav_li_main">
                 {
                     admin==null?
                     user == null? <NavLink className="btn text-white flag_background" id="buton-menu" href="#" to="/register">Registrarme</NavLink>
-                    : <a className="btn text-white flag_background" id="buton-menu" onClick={Sesiones}>Cerrar Sesion</a>
-                    :<a className="btn text-white flag_background" id="buton-menu" onClick={Sesiones}>Cerrar Sesion</a>
+                    : <a className="btn text-white flag_background" id="buton-menu" href="/#" onClick={Sesiones}>Cerrar Sesion</a>
+                    :<a className="btn text-white flag_background" id="buton-menu" href="/#" onClick={Sesiones}>Cerrar Sesion</a>
                 }
                 
             </li>
@@ -252,7 +252,7 @@ function App() {
                     <div className="banner_sm col-sm-12">Últimas actualizaciones</div>
                     <LastUpdates/>
                     <div className="float-right">
-                        ¿Buscas algo en concreto? <a href="#" className="ml-md-3">¡Explora
+                        ¿Buscas algo en concreto? <a href="/#" className="ml-md-3">¡Explora
                             con nosotros!</a>
                     </div>
                 </div>

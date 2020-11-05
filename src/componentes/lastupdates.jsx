@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
 function LastUpdates() {
-  const knowRef = db.ref('Knowled');
   const [Know, setKnow] = useState([]);
-  let FaqNum = 0;
-  const getKnows = async () => {
-    await knowRef.orderByKey().limitToLast(6).on('value', snapshot => {
-        let docs=[];
-        FaqNum=0;
+  const getLastUpdates = async () => {
+    const knowRef = db.ref('Knowled');
+    await knowRef.orderByChild("Actualizacion").limitToLast(6).on('value', snapshot => {
+        const docs=[];
         snapshot.forEach(function(childSnapshot) {
-          docs.push({ ...childSnapshot.val(), id: childSnapshot.key, num:FaqNum});
-          FaqNum++;
+          docs.push({ ...childSnapshot.val(), id: childSnapshot.key});
         });
+        docs.reverse();
         setKnow(docs);
       });
   };
 
   useEffect(() => {
-    getKnows();
+    getLastUpdates();
   }, []);
     return (
         <>

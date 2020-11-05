@@ -34,7 +34,6 @@ function Chat() {
       {
         autoID=chatvalues.length;
       }
-      console.log(autoID);
      chatRef.child(autoID).set({
               id: autoID,
               message: values.textbox,
@@ -53,21 +52,20 @@ function Chat() {
   }
 
   const getChats = async () => {
-    chatRef.orderByKey().limitToLast(10).on('child_added', snapshot => {
-      console.log(snapshot.val());
+    var user1 = JSON.parse(localStorage.getItem("user"));
+    var users2 = "";
+    if (user1 == null) {
+      users2="Users"
+    }
+    else
+    {
+     var partes = user1.email.split("@")
+      users2=partes[0]
+    }
+    const chatRef1 = db.ref('chat/'+users2);
+    chatRef1.orderByKey().limitToLast(10).on('child_added', snapshot => {
       setChatValues(preve=>[...preve, {...snapshot.val()}]);
     });
-
-   /* if (user !=null) {
-      chatRef.orderByKey().limitToLast(10).on('child_added', snapshot => {
-        if (snapshot.val().type == 1) {
-            document.getElementById("chat_room").innerHTML += "<span class='mymessage rounded text-white'>"+snapshot.val().message+"</span><br><br>";
-        } else {
-            document.getElementById("chat_room").innerHTML += "<span class='othermessage bg-secondary rounded text-white'>"+snapshot.val().message+"</span><br><br>";
-        }
-        document.getElementById("chat_room").scrollTop =document.getElementById("chat_room").scrollHeight;
-    });
-    }*/
   };
   const scroll = ()=>{
     document.getElementById("chat_room").scrollTop =document.getElementById("chat_room").scrollHeight;
@@ -81,7 +79,7 @@ function Chat() {
       if (user != null) {
       scroll();
       }
-    }, [chatvalues]);
+    }, [chatvalues, user]);
   
 
   return (

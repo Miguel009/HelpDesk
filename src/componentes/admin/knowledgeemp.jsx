@@ -21,7 +21,8 @@ const faqRef = db.ref('Knowled');
     setValues({ ...values, [name]: value });
   };
   const getFAQById = async (id) => {
-    faqRef.orderByKey().equalTo(id).on('value', snapshot => {
+    const faqRef2 = db.ref('Knowled');
+    faqRef2.orderByKey().equalTo(id).on('value', snapshot => {
         snapshot.forEach(function(childSnapshot) {
             setValues({ ...childSnapshot.val() });
           });
@@ -39,7 +40,8 @@ const faqRef = db.ref('Knowled');
     return false
   }
   const getFAQS = async () => {
-    faqRef.orderByKey().on('value', snapshot => {
+    const faqRef3 = db.ref('Knowled');
+    faqRef3.orderByKey().on('value', snapshot => {
         let docs=[];
         snapshot.forEach(function(childSnapshot) {
           docs.push({ ...childSnapshot.val(), id: childSnapshot.key });
@@ -67,7 +69,15 @@ const faqRef = db.ref('Knowled');
   useEffect(() => {
     getFAQS();
     if (currentId === "") {
-        setValues({ ...initialStateValues });
+      const initialStateValues2 = {
+        Problema: "",
+        Descripcion: "",
+        User: "Users",
+        Categoria: "Hardware",
+        Respuestas: [{}],
+        Actualizacion: ""
+      };
+        setValues({ ...initialStateValues2 });
       } else {
         //https://stackoverflow.com/questions/56059127/how-to-fix-this-error-function-collectionreference-doc
         if (currentId !== null && currentId !== undefined) {
@@ -91,7 +101,7 @@ const faqRef = db.ref('Knowled');
         }
         today = dd + '/' + mm + '/' + yyyy+' a las '+H+':'+n;
         const autoid = faqRef.push().key;
-        const val ={...values, ["Actualizacion"]:today}
+        const val ={...values, "Actualizacion":today}
         if (currentId === "") {
           await faqRef.child(autoid).set(val);
         } else {
@@ -118,7 +128,7 @@ const faqRef = db.ref('Knowled');
     <div className="container p-4">
       <div className="row">
       <div className="col-md-4 p-2">
-        <h2>Agregar FAQS</h2>
+        <h2>Agregar Bases del Conocimiento</h2>
         <form onSubmit={addOrEditFAQ} className="card card-body border-primary">
       <div className="form-group input-group">
         <div className="input-group-text bg-light">
@@ -171,7 +181,8 @@ const faqRef = db.ref('Knowled');
       </div>
       <div className="col-md-8 p-2 text-center">
         <div className="container">
-          <h2>Lista FAQS</h2>
+          <h2>Lista Bases del Conocimiento</h2>
+          <div className="table-responsive">
           <table className="table table-striped table-dark">
             <thead>
               <tr>
@@ -201,6 +212,7 @@ const faqRef = db.ref('Knowled');
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
       </div>

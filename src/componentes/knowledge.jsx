@@ -18,7 +18,6 @@ function Knowledge() {
    var partes = userlog.email.split("@")
     users=partes[0]
   }
-  let FaqNum = 0;
   const initialStateValues = {
     Problema: "",
     Descripcion: "",
@@ -45,14 +44,17 @@ function Knowledge() {
   };
 
   const getKnowById = async (id) => {
-    await knowRef.orderByKey().equalTo(id).on('value', snapshot => {
+    const knowRef2 = db.ref('Knowled');
+    await knowRef2.orderByKey().equalTo(id).on('value', snapshot => {
         snapshot.forEach(function(childSnapshot) {
             setValues({ ...childSnapshot.val() });
           });
     });
   };
   const getKnows = async () => {
-    await knowRef.orderByKey().on('value', snapshot => {
+    let FaqNum = 0;
+    const knowRef1 = db.ref('Knowled');
+    await knowRef1.orderByKey().on('value', snapshot => {
         let docs=[];
         FaqNum=0;
         snapshot.forEach(function(childSnapshot) {
@@ -96,7 +98,7 @@ function Knowledge() {
       }
       today = dd + '/' + mm + '/' + yyyy+' a las '+H+':'+n;
       const autoid = knowRef.push().key;
-      const val ={...values, ["Actualizacion"]:today}
+      const val ={...values, "Actualizacion":today}
       if (currentId === "") {
         await knowRef.child(autoid).set(val);
       } else {
@@ -183,15 +185,23 @@ function Knowledge() {
   }, []);
 
   useEffect(()=>{
+    const initialStateValues2 = {
+      Problema: "",
+      Descripcion: "",
+      User: users,
+      Categoria: "Hardware",
+      Respuestas: [{}],
+      Actualizacion: ""
+    };
     if (currentId === "") {
-      setValues({ ...initialStateValues });
+      setValues({ ...initialStateValues2 });
     } else {
       //https://stackoverflow.com/questions/56059127/how-to-fix-this-error-function-collectionreference-doc
       if (currentId !== null && currentId !== undefined) {
         getKnowById(currentId);
       }
     }
-  }, [currentId])
+  }, [currentId, users])
     return (
       <>
 

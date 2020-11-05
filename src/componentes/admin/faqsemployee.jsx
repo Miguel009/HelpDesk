@@ -28,14 +28,16 @@ const faqRef = db.ref('FAQS');
     return false
   }
   const getFAQById = async (id) => {
-    faqRef.orderByKey().equalTo(id).on('value', snapshot => {
+    const faqRef1 = db.ref('FAQS');
+    faqRef1.orderByKey().equalTo(id).on('value', snapshot => {
         snapshot.forEach(function(childSnapshot) {
             setValues({ ...childSnapshot.val() });
           });
     });
   };
   const getFAQS = async () => {
-    faqRef.orderByKey().on('value', snapshot => {
+    const faqRef2 = db.ref('FAQS');
+    faqRef2.orderByKey().on('value', snapshot => {
         let docs=[];
         snapshot.forEach(function(childSnapshot) {
           docs.push({ ...childSnapshot.val(), id: childSnapshot.key });
@@ -53,7 +55,11 @@ const faqRef = db.ref('FAQS');
   useEffect(() => {
     getFAQS();
     if (currentId === "") {
-        setValues({ ...initialStateValues });
+      const initialStateValues2 = {
+        Problema: "",
+        Solucion: ""
+      };
+        setValues({ ...initialStateValues2 });
       } else {
         //https://stackoverflow.com/questions/56059127/how-to-fix-this-error-function-collectionreference-doc
         if (currentId !== null && currentId !== undefined) {
@@ -129,9 +135,10 @@ const faqRef = db.ref('FAQS');
     </form>
       </div>
       <div className="col-md-8 p-2 text-center">
-        <div class="container">
+        <div className="container">
           <h2>Lista FAQS</h2>
-          <table class="table table-striped table-dark">
+          <div className="table-responsive">
+          <table className="table table-striped table-dark">
             <thead>
               <tr>
                 <th scope="col">Problema</th>
@@ -154,6 +161,7 @@ const faqRef = db.ref('FAQS');
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
       </div>

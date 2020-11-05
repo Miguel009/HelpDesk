@@ -44,11 +44,10 @@ function ChatEmployee() {
             })
       }
   }
-  const chatUsers = db.ref('chat');
-  const getUsers = async () => {
 
+  const getUsers = async () => {
+    const chatUsers = db.ref('chat');
     chatUsers.orderByKey().on('child_added', snapshot => {
-      console.log("usuario ingresado");
       var primerfa= true;
       setusersVal(prevvalus =>[...prevvalus, snapshot.key]);
       toast("Se agrego al Usuario "+snapshot.key, {
@@ -65,36 +64,13 @@ function ChatEmployee() {
       })
       primerfa=false;
     });
-
-
-   /* if (user !=null) {
-      chatRef.orderByKey().limitToLast(10).on('child_added', snapshot => {
-        if (snapshot.val().type == 1) {
-            document.getElementById("chat_room").innerHTML += "<span class='mymessage rounded text-white'>"+snapshot.val().message+"</span><br><br>";
-        } else {
-            document.getElementById("chat_room").innerHTML += "<span class='othermessage bg-secondary rounded text-white'>"+snapshot.val().message+"</span><br><br>";
-        }
-        document.getElementById("chat_room").scrollTop =document.getElementById("chat_room").scrollHeight;
-    });
-    }*/
   };
   
-  const getChats = async () => {
-    const chatRefs = db.ref('chat/'+values.usuario);
-    chatRefs.orderByKey().on('child_added', snapshot => {
+  const getChats = async (user) => {
+    const chatRefs1 = db.ref('chat/'+user);
+    chatRefs1.orderByKey().on('child_added', snapshot => {
       setChatValues(preve=>[...preve, {...snapshot.val()}]);
     });
-
-   /* if (user !=null) {
-      chatRef.orderByKey().limitToLast(10).on('child_added', snapshot => {
-        if (snapshot.val().type == 1) {
-            document.getElementById("chat_room").innerHTML += "<span class='mymessage rounded text-white'>"+snapshot.val().message+"</span><br><br>";
-        } else {
-            document.getElementById("chat_room").innerHTML += "<span class='othermessage bg-secondary rounded text-white'>"+snapshot.val().message+"</span><br><br>";
-        }
-        document.getElementById("chat_room").scrollTop =document.getElementById("chat_room").scrollHeight;
-    });
-    }*/
   };
 
   const scroll = ()=>{
@@ -106,7 +82,7 @@ function ChatEmployee() {
 
   useEffect(()=>{
     setChatValues([]);
-    getChats();
+    getChats(values.usuario);
     
     return()=>{
       if (values.usuario!=="") 

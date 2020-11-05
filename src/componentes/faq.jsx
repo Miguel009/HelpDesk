@@ -2,12 +2,12 @@ import './css/faqs.css';
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
 function Faq() {
-    const faqRef = db.ref('FAQS');
     const [Faqs, setFaqs] = useState([]);
-    let FaqNum = 0;
     const getFAQS = async () => {
+        const faqRef = db.ref('FAQS');
         faqRef.orderByKey().on('value', snapshot => {
             let docs=[];
+            let FaqNum = 0;
             FaqNum=0;
             snapshot.forEach(function(childSnapshot) {
               docs.push({ ...childSnapshot.val(), id: childSnapshot.key, num: FaqNum});
