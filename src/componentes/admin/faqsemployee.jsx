@@ -47,9 +47,32 @@ const faqRef = db.ref('FAQS');
   };
 
   const onDeleteFAQ = async (id) => {
-    if (window.confirm("Esta seguro que quiere eliminar la faq?")) {
-        faqRef.child(id).remove();
-    }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+          confirmButton: 'btn btn-success btn2',
+          cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+      })
+      swalWithBootstrapButtons.fire({
+          title: '¿Esta seguro que quiere eliminar este pregunta?',
+          showCancelButton: true,
+          confirmButtonText: `Si`,
+          cancelButtonText: 'No'
+        }).then(async (result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            await faqRef.child(id).remove();
+              Swal.fire({
+                  title: 'Sesion Cerrada!',
+                  text: 'Gracias!',
+                  icon: 'success',
+                  confirmButtonText: 'Ok!'
+                  })
+          } else {
+            Swal.fire('Ninguna accion tomada', '', 'info')
+          }
+        })
   };
 
   useEffect(() => {

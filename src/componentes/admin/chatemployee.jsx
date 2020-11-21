@@ -78,6 +78,14 @@ function ChatEmployee() {
   }
   useEffect(() => {
     getUsers();
+    return()=>{
+      const chatUsers2 = db.ref('chat');
+      chatUsers2.orderByKey().on('child_added', snapshot => {
+        const chatRefs3 = db.ref('chat/'+snapshot.key);
+        chatRefs3.off('child_added');
+      });
+      chatUsers2.off('child_added');
+    }
   }, []);
 
   useEffect(()=>{

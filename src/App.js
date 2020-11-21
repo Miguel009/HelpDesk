@@ -185,7 +185,7 @@ function App() {
                     admin==null?
                     user == null ? <NavLink className="nav-link" to="/sign-in">Iniciar sesión</NavLink>
                 : <a className="nav-link" data-toggle="modal" data-target="#exampleModal" href="/#">{users}</a>
-                :<a className="nav-link" data-toggle="modal" data-target="#exampleModal" href="/#">{admin.email}</a>
+                :<a className="nav-link" href="/#">{admin.email}</a>
                 }
             </li>
             <li className="nav-item nav_li_main">

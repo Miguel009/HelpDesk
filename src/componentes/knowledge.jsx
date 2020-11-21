@@ -8,6 +8,7 @@ function Knowledge() {
   const [currentId2, setCurrentId2] = useState("");
   const [currentPos, setcurrentPos] = useState("");
   const [respuestasOform, setRespuestasOform] = useState(true);
+  const [nuevo, setNuevo] = useState([]);
   var userlog = JSON.parse(localStorage.getItem("user"));
   var users = "";
   if (userlog == null) {
@@ -15,8 +16,8 @@ function Knowledge() {
   }
   else
   {
-   var partes = userlog.email.split("@")
-    users=partes[0]
+   var partes = userlog.email.split(".")
+    users=partes[0]+partes[1];
   }
   const initialStateValues = {
     Problema: "",
@@ -62,13 +63,37 @@ function Knowledge() {
           FaqNum++;
         });
         setKnow(docs);
+        setNuevo(docs);
       });
   };
 
   const onDeleteKnow = async (id) => {
-    if (window.confirm("Esta seguro que quiere eliminar este pregunta?")) {
-      await knowRef.child(id).remove();
-    }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+          confirmButton: 'btn btn-success btn2',
+          cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+      })
+      swalWithBootstrapButtons.fire({
+          title: '¿Esta seguro que quiere eliminar este pregunta?',
+          showCancelButton: true,
+          confirmButtonText: `Si`,
+          cancelButtonText: 'No'
+        }).then(async (result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            await knowRef.child(id).remove();
+              Swal.fire({
+                  title: 'Sesion Cerrada!',
+                  text: 'Gracias!',
+                  icon: 'success',
+                  confirmButtonText: 'Ok!'
+                  })
+          } else {
+            Swal.fire('Ninguna accion tomada', '', 'info')
+          }
+        })
   };
 
   const emptyspaces = (values)=>{
@@ -126,7 +151,7 @@ function Knowledge() {
     try {
       if (!emptyspaces(values2)) {
       //if (currentId === "") {
-        let array = Know[currentPos].Respuestas;
+        let array = nuevo[currentPos].Respuestas;
         let numero = 0;
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
@@ -163,7 +188,17 @@ function Knowledge() {
     setValues(initialStateValues);
   };
 
-
+  const imprimir = (e)=>{
+    const { value } = e.target;
+    if (value !== "Todo") {
+      var filtrar = nuevo.filter(ele => ele.Categoria === value);
+      setKnow(filtrar);
+    }
+    else
+    {
+      setKnow(nuevo);
+    }
+  }
   const abrir = (id, num)=>{
     setRespuestasOform(false)
     setCurrentId2(id);
@@ -216,6 +251,18 @@ function Knowledge() {
                       :
                       null
                   }
+            <select className="form-control" name="Catego" onChange={imprimir}>
+               <option>Hardware</option>
+               <option>Software</option>
+               <option>Mantenimiento</option>
+               <option>Ordenadores Completos</option>
+               <option>Modding</option>
+               <option>Juegos</option>
+               <option>Moviles</option>
+               <option>Electronica de Consumo</option>
+               <option>Internet y Conectividad</option>
+               <option>Todo</option>
+            </select>
                   <div className="accordion" id="faqgroup">
                   {
                   Know.map((know) => (
@@ -230,7 +277,7 @@ function Knowledge() {
                                       aria-expanded="false"
                                       aria-controls={"coll"+know.num}
                                   >
-                                      {know.Problema}
+                                      {know.Problema}-Categoria: {know.Categoria}
                                       <br/>
                                       <label className="label_btn">{"Por @"+know.User}</label>
                                   </button>
@@ -271,7 +318,7 @@ function Knowledge() {
      <div className="modal-dialog">
        <div className="modal-content">
          <div className="modal-header">
-           <h5 className="modal-title" id="exampleModalLabel">New message</h5>
+           <h5 className="modal-title" id="exampleModalLabel">Respuestas</h5>
            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
            </button>
@@ -304,9 +351,9 @@ function Knowledge() {
            <>
            <div className="answersplace" data-spy="scroll">
           {
-           Know[currentPos] !== undefined?  
-          Know[currentPos].Respuestas!==undefined?
-          Know[currentPos].Respuestas.map((resp) =>(
+           nuevo[currentPos] !== undefined?  
+           nuevo[currentPos].Respuestas!==undefined?
+           nuevo[currentPos].Respuestas.map((resp) =>(
               <div className="alert alert-primary" role="alert">
                <strong>{resp.User}</strong> Dice: {resp.Respuesta}
               </div>
@@ -331,7 +378,7 @@ function Knowledge() {
          <div className="modal-footer">
            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
            {userlog!=null?
-           <button type="submit" className="btn btn-success" data-dismiss={respuestasOform?"modal":null} onClick={respuestasOform?addOrEditKnow:addOrEditanswer}>Send message</button>
+           <button type="submit" className="btn btn-success" data-dismiss={respuestasOform?"modal":null} onClick={respuestasOform?addOrEditKnow:addOrEditanswer}>Enviar</button>
            :null
            }
          </div>

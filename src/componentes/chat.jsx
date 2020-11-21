@@ -10,8 +10,8 @@ function Chat() {
   }
   else
   {
-   var partes = user.email.split("@")
-    users=partes[0]
+   var partes = user.email.split(".")
+    users=partes[0]+partes[1];
   }
   const [chatvalues, setChatValues] = useState([]);
   const chatRef = db.ref('chat/'+users);
@@ -59,8 +59,8 @@ function Chat() {
     }
     else
     {
-     var partes = user1.email.split("@")
-      users2=partes[0]
+     var partes = user1.email.split(".")
+      users2=partes[0]+partes[1];
     }
     const chatRef1 = db.ref('chat/'+users2);
     chatRef1.orderByKey().limitToLast(10).on('child_added', snapshot => {

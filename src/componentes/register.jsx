@@ -15,12 +15,18 @@ function Register() {
       const { name, value } = e.target;
       setValues({ ...values, [name]: value });
     };
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      if (values.Email.trim() !== "" && values.password.trim() !== "" && values.confirmpassword.trim() !== "") {
-        if (values.confirmpassword===values.password) {
-            var autoID = userRef.push().key
+    const exist = (existe)=>{
+      if (existe !== undefined) {
+        Swal.fire({
+          title: 'Error!',
+          text: 'El usuario ya existe',
+          icon: 'error',
+          confirmButtonText: 'Entendido'
+          })
+      }
+      else
+      {
+        var autoID = userRef.push().key
             userRef.child(autoID).set({
                     Email: values.Email,
                     Passw: values.password
@@ -31,6 +37,18 @@ function Register() {
                 icon: 'success',
                 confirmButtonText: 'Yes!'
                 })
+      }
+    }
+    const validarexiste = (correo)=>{
+      userRef.orderByChild('Email').equalTo(correo).once('value', snapshot => {
+        exist(snapshot.val());
+    });
+    }
+    const handleSubmit =(e) => {
+      e.preventDefault();
+      if (values.Email.trim() !== "" && values.password.trim() !== "" && values.confirmpassword.trim() !== "") {
+        if (values.confirmpassword===values.password) {
+            validarexiste(values.Email.trim())
         } else {
             Swal.fire({
                 title: 'Error!',

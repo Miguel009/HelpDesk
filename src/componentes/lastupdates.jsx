@@ -6,8 +6,10 @@ function LastUpdates() {
     const knowRef = db.ref('Knowled');
     await knowRef.orderByChild("Actualizacion").limitToLast(6).on('value', snapshot => {
         const docs=[];
+        var usuario;
         snapshot.forEach(function(childSnapshot) {
-          docs.push({ ...childSnapshot.val(), id: childSnapshot.key});
+          usuario = childSnapshot.val().User.split("@");
+          docs.push({ ...childSnapshot.val(), id: childSnapshot.key, User:usuario[0]});
         });
         docs.reverse();
         setKnow(docs);
