@@ -1,3 +1,25 @@
+# Proyecto Creado por Estudiantes de la UDB para la Materia Lenguaje Interpretado en el Cliente Grupo 02T para el año 2020 Problema 1: HelpDesk
+## Integrante:
+
+Arévalo Henríquez	Erick Fabricio		AH180223
+
+Barrera Flamenco	Edgard Alexander	BF180436
+
+Flores Reyes		Miguel Ángel		FR180116
+
+Meléndez Martínez	Miguel Alejandro	MM180363
+
+Ochoa Ramos		Ricardo José		OR190251
+
+## Herramientas
+
+ApiRest: Realtime Database de Firebase
+
+App: React, Boostrap 4, SASS, Material Icons, SweetAlert, React-Toastify
+
+Versionamiento: Gitlab, Migrado a Github
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
