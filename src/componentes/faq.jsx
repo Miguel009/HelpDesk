@@ -40,7 +40,7 @@ function Faq() {
                             aria-controls={"coll"+Faq.num}
                         >
                             <i className="material-icons">text_snippet</i>
-                            <p>{Faq.Problema}</p>
+                            <p class="d-inline">{Faq.Problema}</p>
                         </button>
                     </h2>
                 </div>
