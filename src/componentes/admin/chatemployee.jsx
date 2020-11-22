@@ -76,6 +76,7 @@ function ChatEmployee() {
   const scroll = ()=>{
     document.getElementById("chat_room").scrollTop =document.getElementById("chat_room").scrollHeight;
   }
+
   useEffect(() => {
     getUsers();
     return()=>{
@@ -105,9 +106,8 @@ function ChatEmployee() {
           });
         }
         primerfa1=false;
-      })
+      })        
     }
-
     }
   }, [values.usuario])
 

@@ -37,6 +37,7 @@ function Chat() {
         message: values.textbox,
         type: 1
       });
+      setValues(mensaje);
     }
     else {
       Swal.fire({
@@ -99,7 +100,7 @@ function Chat() {
               </div>
               <div className="input_content">
                 <div className="d-table-cell w-100">
-                  <input type="text" className="form-control rounded-0" name="textbox" onChange={handleInputChange} />
+                  <input type="text" className="form-control rounded-0" name="textbox" onChange={handleInputChange} value={values.textbox} />
                 </div>
                 <div className="d-table-cell align-middle">
                   <button id="enter" className="btn-ustlye btn btn-primary flag_background btn_margin rounded-0" onClick={salachat}><i class="material-icons float-left">send</i></button>

@@ -167,10 +167,10 @@ function App() {
                                             <NavLink to="chatemployee" className="nav-link">Chat</NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <NavLink to="knowledgeemp" className="nav-link">Base de Conocimiento</NavLink>
+                                            <NavLink to="knowledgeemp" id="KEmplo" className="nav-link">Base de Conocimiento</NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <NavLink to="faqsemployee" className="nav-link">FAQ</NavLink>
+                                            <NavLink to="faqsemployee" id="FEmplo" className="nav-link">FAQ</NavLink>
                                         </li>
                                     </>
                             }

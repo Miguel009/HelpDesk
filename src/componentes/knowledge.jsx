@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
 import Swal from "sweetalert2";
+import { auth } from "firebase";
 function Knowledge() {
   const knowRef = db.ref('Knowled');
   const [Know, setKnow] = useState([]);
@@ -54,13 +55,14 @@ function Knowledge() {
   const getKnows = async () => {
     let FaqNum = 0;
     const knowRef1 = db.ref('Knowled');
-    await knowRef1.orderByKey().on('value', snapshot => {
+    await knowRef1.orderByChild("Actualizacion").on('value', snapshot => {
       let docs = [];
       FaqNum = 0;
       snapshot.forEach(function (childSnapshot) {
         docs.push({ ...childSnapshot.val(), id: childSnapshot.key, num: FaqNum });
         FaqNum++;
       });
+      docs.reverse();
       setKnow(docs);
       setNuevo(docs);
     });
@@ -149,7 +151,14 @@ function Knowledge() {
     try {
       if (!emptyspaces(values2)) {
         //if (currentId === "") {
-        let array = nuevo[currentPos].Respuestas;
+          let array;
+          if (nuevo[currentPos]=== undefined) {
+            array = undefined;
+          }
+          else
+          {
+             array = nuevo[currentPos].Respuestas;
+          }
         let numero = 0;
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
@@ -198,7 +207,7 @@ function Knowledge() {
   const abrir = (id, num) => {
     setRespuestasOform(false)
     setCurrentId2(id);
-    setcurrentPos(num);
+    setcurrentPos(nuevo.length-1-num);
   }
 
   const defaults = (e) => {
@@ -214,6 +223,18 @@ function Knowledge() {
   useEffect(() => {
     getKnows();
   }, []);
+
+  useEffect(() => {
+    const ah = ()=>{
+      console.log(currentId2);
+      nuevo.forEach(element => {
+        if (element.id == currentId2) {
+          setcurrentPos(nuevo.length -1-element.num);
+        }
+      });
+    }
+    ah();
+  }, [nuevo]);
 
   useEffect(() => {
     const initialStateValues2 = {
@@ -360,7 +381,7 @@ function Knowledge() {
                             )) :
                             <h1>No hay comentarios :c</h1>
                           :
-                          null
+                          <h1>No hay comentarios :c</h1>
                       }
                     </div>
                     {userlog != null ?
