@@ -282,7 +282,7 @@ function Knowledge() {
             <option>Moviles</option>
             <option>Electronica de Consumo</option>
             <option>Internet y Conectividad</option>
-            <option>Todo</option>
+            <option selected>Todo</option>
           </select>
         </div>
         <div className="accordion" id="faqgroup">
