@@ -122,6 +122,9 @@ function Knowledge() {
         if (n < 10) {
           n = "0" + n;
         }
+        if (H < 10) {
+          H = "0" + H;
+        }
         today = dd + '/' + mm + '/' + yyyy + ' a las ' + H + ':' + n;
         const autoid = knowRef.push().key;
         const val = { ...values, "Actualizacion": today }
@@ -168,6 +171,9 @@ function Knowledge() {
         var n = today.getMinutes();
         if (n < 10) {
           n = "0" + n;
+        }
+        if (H < 10) {
+          H = "0" + H;
         }
         today = dd + '/' + mm + '/' + yyyy + ' a las ' + H + ':' + n;
         if (array !== undefined) {

@@ -33,6 +33,7 @@ function ChatEmployee() {
               message: values.textbox,
               type: 0
         });
+        setValues({ ...values, "textbox": "" });
       }
       else
       {
@@ -150,7 +151,7 @@ function ChatEmployee() {
     </div>
     <div className="input_content">
         <div className="d-table-cell w-100">
-            <input type="text" className="form-control rounded-0" name="textbox" onChange={handleInputChange}/>
+            <input type="text" className="form-control rounded-0" name="textbox" autoComplete="off" onChange={handleInputChange} value={values.textbox}/>
         </div>
         <div className="d-table-cell align-middle">
             <button id="enter" className="btn btn-primary flag_background btn_margin rounded-0" onClick = {salachat}>enter</button>
