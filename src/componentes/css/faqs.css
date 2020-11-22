@@ -1,40 +1,55 @@
 .collapse-background {
-    background: #880e4f;
-    border-color: #880e4f;
-  }
-  
-  .collapse-background button {
-    font-weight: bolder;
-    margin: 0em auto;
-  }
-  
-  .collapse-background button i {
-    float: right;
-  }
-  
-  .collapse-background button p {
-    margin-right: 2em;
-  }
-  
-  .collapse-header {
-    color: #ffffff;
-  }
-  
-  .collapse-header:hover {
-    color: #ffffff;
-    text-decoration: none;
-  }
-  
-  .collapse-header:active, .collapse-header:focus {
-    color: #ffffff;
-    text-decoration: none;
-  }
-  
-  #title-faq {
-    text-align: center;
-    margin: 0.5em auto 1em;
-  }
-  
-  div .content {
-    text-align: justify;
-  }
+  background  : #ffffff;
+  border-color: #880e4f;
+}
+
+.collapse-background button:focus, .btn-ustlye:focus{
+  box-shadow: none;
+}
+
+.collapse-background button {
+  font-weight: bolder;
+  margin     : 0em auto;
+}
+
+.collapse-background button i {
+  float: right;
+}
+
+.collapse-background button p {
+  margin-right: 2em;
+}
+
+.collapse-header {
+  color      : #5b5b5b;
+  font-weight: normal !important;
+}
+
+.collapse-header:hover {
+  color          : #d81b60;
+  text-decoration: none;
+}
+
+.collapse-header:active,
+.collapse-header:focus {
+  color          : #d81b60;
+  text-decoration: none;
+}
+
+#title-faq {
+  text-align   : center;
+  padding      : 0 0.5em 0.5em;
+  color        : #da1b60;
+  border-bottom: 1px solid #da1b60;
+}
+
+div .content {
+  text-align: justify;
+}
+
+.filtro {
+  width         : auto;
+  display       : inline-block;
+  margin        : 0 1em;
+  vertical-align: middle;
+}
