@@ -16,7 +16,7 @@ function Register() {
     setValues({ ...values, [name]: value });
   };
   const exist = (existe) => {
-    if (existe !== undefined) {
+    if (existe !== null) {
       Swal.fire({
         title: 'Error!',
         text: 'El usuario ya existe',

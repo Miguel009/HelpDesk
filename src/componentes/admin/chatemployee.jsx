@@ -54,6 +54,7 @@ function ChatEmployee() {
         type: "success",
       });
       const chatRefs3 = db.ref('chat/'+snapshot.key);
+      chatRefs3.off('child_added')
       var user = snapshot.key;
       chatRefs3.limitToLast(1).on('child_added', snapshot =>{
         if (!primerfa&&snapshot.val().type!==0) {
