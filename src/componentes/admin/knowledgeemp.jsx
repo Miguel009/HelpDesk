@@ -122,6 +122,9 @@ const faqRef = db.ref('Knowled');
         if (n<10) {
           n="0"+n;
         }
+        if (H < 10) {
+          H = "0" + H;
+        }
         today = dd + '/' + mm + '/' + yyyy+' a las '+H+':'+n;
         const autoid = faqRef.push().key;
         const val ={...values, "Actualizacion":today}
