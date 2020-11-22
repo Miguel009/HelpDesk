@@ -300,7 +300,7 @@ function Knowledge() {
                       type="button"
                     >
                       <h6>[{know.Categoria}] {know.Problema}</h6>
-                      <span className="sm_user"><span className="align-middle">@{know.User}</span></span>
+                      <span className="sm_user"><span className="align-middle">De {know.User}</span></span>
                       <span className="sm_desc"><i className="material-icons align-middle">event</i><span
                         className="align-middle"> Última
                             actualización: {know.Actualizacion}</span></span>

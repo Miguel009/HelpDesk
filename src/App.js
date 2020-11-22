@@ -248,8 +248,9 @@ function App() {
                                         <div className="banner_sm col-sm-12">Últimas actualizaciones</div>
                                         <LastUpdates />
                                         <div className="float-right">
-                                            ¿Buscas algo en concreto? <a href="/#" className="ml-md-3">¡Explora
-                            con nosotros!</a>
+                                            ¿Buscas algo en concreto? 
+                            <NavLink to="knowledge" className="ml-md-3">¡Explora
+                            con nosotros!</NavLink>
                                         </div>
                                     </div>
                                     <div className="col-md-4">
