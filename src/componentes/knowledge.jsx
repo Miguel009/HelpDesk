@@ -235,16 +235,13 @@ function Knowledge() {
   }, [currentId, users])
   return (
     <>
-
-
       <div className="main">
         <div className="container-fluid">
-          <h2 id="title-faq">Base de Conocimiento</h2>
-        </div>
-        <div class="mb-3 mt-3">
+        <h2 id="title-faq">Base de Conocimiento</h2>
+        <div className="mb-3 mt-3">
           {
             userlog != null ?
-              <button className="btn btn-success" id="submit" onClick={defaults} data-toggle="modal" data-target="#exampleModa2"><i class="material-icons float-left">add</i> Nuevo</button>
+              <button className="btn btn-success" id="submit" onClick={defaults} data-toggle="modal" data-target="#exampleModa2"><i className="material-icons float-left">add</i> Nuevo</button>
               :
               null
           }
@@ -266,21 +263,25 @@ function Knowledge() {
             Know.map((know) => (
               <div className="card" key={know.id}>
                 <div className="card-header card_edge_bg" id={"Faq" + know.num}>
-                  <h2 className="mb-0">
+                  <li className="pb_cont cursor-pointer" data-toggle="collapse"
+                    data-target={"#coll" + know.num}
+                    aria-expanded="false"
+                    aria-controls={"coll" + know.num}>
+                    <img src="./img/avatar.png" alt="" />
                     <button
-                      className="btn btn-link btn-block text-left text_btn_edge"
+                      className="btn-ustlye btn text-left pb_data col-auto mr-auto align-self-center"
                       type="button"
-                      data-toggle="collapse"
-                      data-target={"#coll" + know.num}
-                      aria-expanded="false"
-                      aria-controls={"coll" + know.num}
                     >
-                      {know.Problema}-Categoria: {know.Categoria}
-                      <br />
-                      <label className="label_btn">{"Por @" + know.User}</label>
+                      <h6>[{know.Categoria}] {know.Problema}</h6>
+                      <span className="sm_user"><span className="align-middle">@{know.User}</span></span>
+                      <span className="sm_desc"><i className="material-icons align-middle">event</i><span
+                        className="align-middle"> Última
+                            actualización: {know.Actualizacion}</span></span>
                     </button>
-                    <span className="span_edge">{know.Respuestas === undefined ? 0 : know.Respuestas.length} respuestas</span>
-                  </h2>
+                    <div className="flag_rpl flag_green col-auto">
+                      <span className="">{know.Respuestas === undefined ? 0 : know.Respuestas.length}</span><span className="flag_rpl_sub">Respuestas</span>
+                    </div>
+                  </li>
                 </div>
                 <div
                   id={"coll" + know.num}
@@ -292,7 +293,7 @@ function Knowledge() {
                     {know.Descripcion}
                   </div>
                   <div className="card-footer body_text_edge">
-                    <button className="btn btn-success text-white btn2" id="submit" data-toggle="modal" onClick={() => abrir(know.id, know.num)} data-target="#exampleModa2">Ver Respuestas o Responder</button>
+                    <button className="btn btn-info text-white btn2" id="submit" data-toggle="modal" onClick={() => abrir(know.id, know.num)} data-target="#exampleModa2">Ver Respuestas o Responder</button>
                     {
                       userlog != null ?
                         users === know.User ?
@@ -311,6 +312,7 @@ function Knowledge() {
             )
             )}
         </div>
+      </div>
       </div>
       <div className="modal fade" id="exampleModa2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog">
@@ -374,7 +376,7 @@ function Knowledge() {
               }
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" className="btn btn-secondary" data-dismiss="modal">Cerrar</button>
               {userlog != null ?
                 <button type="submit" className="btn btn-success" data-dismiss={respuestasOform ? "modal" : null} onClick={respuestasOform ? addOrEditKnow : addOrEditanswer}>Enviar</button>
                 : null

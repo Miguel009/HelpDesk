@@ -14,6 +14,12 @@ li {
 .main {
   padding: 1em;
 }
+.margin-footer{
+  margin-bottom: 10em;
+}
+.btn-ustlye:focus{
+  box-shadow: none;
+}
 
 .row_mn_main li {
   padding: 0.5em;
@@ -161,6 +167,7 @@ li {
 }
 
 .sec_footer {
+  position: relative;
   bottom: 0;
   font-size: 14px;
   width: 100%;
@@ -302,8 +309,14 @@ li {
   border: 2px solid #880e4f;
 }
 
+.chat_room div{
+  display: flow-root;
+  margin: 0.5em 0;
+}
+
 .chat_room{
   width: 100%;
+  padding: 0.5em;
   height: 500px;
   position: relative;
   overflow-y: scroll;
@@ -312,13 +325,16 @@ li {
 .content_chat{
   border: 3px #880e4f solid;
   padding: 0 !important;
+  background: #f9fafa;
 }
 
 .chat_header{
   text-align: center;
-  background: #880e4f;
-  color: white;
+  background: #ffffff;
+  color: #d81b60;
   font-size: 20px;
+  border-bottom: 1px solid #880e4f;
+  margin-bottom: 0.5em;
   padding: 1rem;
 }
 
@@ -327,14 +343,16 @@ li {
 }
 
 .othermessage{
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0.3rem 1rem;
+  border-radius: 10px 10px 10px 0;
+  background-color: #6d829c;
 }
 
 .mymessage{
   background-color: #d81b60;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0.3rem 1rem;
+  margin: 0 0.5em;
+  border-radius: 10px 10px 0 10px;
   float: right;
 }
 
@@ -384,9 +402,9 @@ li {
 }
 
 .form_content_contact {
-  background-color: #eaeaea;
+  background-color: #f6f6f6;
   padding: 0.2em;
-  margin-bottom: 10px;
+  margin-bottom: 10px; 
 }
 
 .form_text_label {
@@ -405,6 +423,10 @@ li {
 
 .label_info_contact {
   font-size: 0.9em;
+}
+
+.cursor-pointer{
+  cursor: pointer;
 }
 
 .span_edge {
@@ -438,19 +460,19 @@ li {
 .body_text_edge {
   font-size: 14.5px;
   color: #202124;
-  background-color: #eaeaea;
+  border-color:  #cfcfcf;
 }
 
 a.active {
   color: #880e4f !important;
-  text-decoration: underline !important;
 }
 
 
 .answersplace
 {
-    width: 100%;
-    height: 400px;
-    position: relative;
-    overflow-y: scroll;
+  width: 100%;
+  height: 400px;
+  padding-right: 1em;
+  position: relative;
+  overflow-y: scroll;
 }

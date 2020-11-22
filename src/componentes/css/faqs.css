@@ -3,7 +3,7 @@
   border-color: #880e4f;
 }
 
-.collapse-background button:focus {
+.collapse-background button:focus, .btn-ustlye:focus{
   box-shadow: none;
 }
 
